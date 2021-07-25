@@ -14,8 +14,11 @@ app.get("/pieces", (req, res) => {
 app.get("/pieces/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const piece = stock.find((piece) => piece.id === id);
+  if (piece) {
+    return res.status(200).send({ isValid: true, data: piece });
+  }
 
-  res.status(200).send({ isValid: true, data: piece });
+  res.status(404).send({ isValid: false, erorr: "piece not find, check id" });
 });
 
 app.post("/pieces", (req, res) => {
