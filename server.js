@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
   res.send("mosaab bensalah");
 });
 app.get("/pieces", (req, res) => {
-  res.status(200).send({ isValid: true, data: stock, name: "mosaab" });
+  res.status(200).send({ isValid: true, data: stock });
 });
 app.get("/pieces/:id", (req, res) => {
   const id = parseInt(req.params.id);
@@ -52,9 +52,13 @@ app.put("/pieces/:id", (req, res) => {
 });
 app.delete("/pieces/:id", (req, res) => {
   const id = req.params.id;
-  const piec = stock.find((piece) => piece.id !== id);
+  console.log(typeof id);
+  const piec = stock.find((piece) => piece.id == id);
 
-  res.status(200).send({ isValid: true, data: piec });
+  if (piec) {
+    return res.status(200).send({ isValid: true, data: piec });
+  }
+  res.status(404).send({ isValid: false, erorr: "id not found, please check" });
 });
 
 app.listen(process.env.PORT || 80, () => {
