@@ -49,9 +49,9 @@ app.put("/pieces/:id", (req, res) => {
 });
 app.delete("/pieces/:id", (req, res) => {
   const id = req.params.id;
-  const piec = stock.filter((piece) => piece.id !== id);
+  const piec = stock.find((piece) => piece.id !== id);
 
-  res.status(201).send({ isValid: true, data: piec });
+  res.status(200).send({ isValid: true, data: piec });
 });
 
 app.listen(process.env.PORT || 80, () => {
