@@ -54,6 +54,6 @@ app.delete("/pieces/:id", (req, res) => {
   res.status(201).send({ isValid: true, data: piec });
 });
 
-app.listen("3000", () => {
+app.listen(process.env.PORT || 80, () => {
   console.log("welcom to server 3000");
 });
