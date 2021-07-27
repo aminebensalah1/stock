@@ -25,6 +25,19 @@ app.post("/pieces", (req, res) => {
   const id = crypto.randomBytes(8).toString("hex");
   console.log(req.body);
   const piece = { id, ...req.body };
+  if (!piece.hasOwnProperty("name")) {
+    res.status(500).send("please enter proprty name");
+  }
+  if (!piece.hasOwnProperty("quantity ")) {
+    res.status(500).send("please enter proprty quantity");
+  }
+  if (!piece.hasOwnProperty("color")) {
+    res.status(500).send("please enter proprty color");
+  }
+  if (!piece.hasOwnProperty("prix")) {
+    res.status(500).send("please enter proprty prix");
+  }
+
   stock.push(piece);
 
   res.status(201).send({ isValid: true, data: piece });
@@ -62,5 +75,5 @@ app.delete("/pieces/:id", (req, res) => {
 });
 
 app.listen(process.env.PORT || 80, () => {
-  console.log("welcom to server 3000");
+  console.log("welcom to server 80");
 });
